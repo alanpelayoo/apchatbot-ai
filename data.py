@@ -34,6 +34,8 @@ class DataProcessing:
         self.labels = sorted(self.labels)
         self.bag_of_words()
 
+    
+
     def bag_of_words(self):
         print("step 3")
         out_empty = [ 0 for _ in range(len(self.labels))]
