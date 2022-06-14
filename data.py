@@ -1,7 +1,9 @@
 import nltk
 from nltk.stem.lancaster import LancasterStemmer
+
 import numpy
 stemmer = LancasterStemmer()
+
 
 class DataProcessing:
     def __init__(self, data):
@@ -14,7 +16,6 @@ class DataProcessing:
         self.output = []
 
     def fill_lists(self):
-        print("step 1")
         print(self.words,self.training)
         for intent in self.data['intents']:
             for pattern in intent['patterns']:
@@ -28,7 +29,6 @@ class DataProcessing:
         self.stem_list()
 
     def stem_list(self):
-        print("step 2")
         self.words = [stemmer.stem(w.lower()) for w in self.words] #standarize words to base form.
         self.words = sorted(list(set(self.words)))  #Stemed vocabulary created.
         self.bag_of_words()
@@ -36,9 +36,7 @@ class DataProcessing:
     
 
     def bag_of_words(self):
-        print("step 3")
         out_empty = [ 0 for _ in range(len(self.labels))]
-
         for x,doc in enumerate(self.sentence_x):
             bag = []
             wrds = [stemmer.stem(w.lower()) for w in doc]
