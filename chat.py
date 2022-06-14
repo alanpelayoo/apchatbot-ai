@@ -9,6 +9,7 @@ import nltk
 from write2json import update_data
 def chat(chatbot_data,model,data):
     print("Chatbot")
+    valores =[]
     while True:
         inp = input("You: ")
         if inp.lower() == "quit":
@@ -25,10 +26,12 @@ def chat(chatbot_data,model,data):
                 responses = tg['responses']
 
         print(random.choice(responses))
-        print(show_results(chatbot_data,results))
+        
+        list_T = show_results(chatbot_data,results)
+        print(list_T)
+        valores.append(1.0-float(list_T[0][1]))
 
         answer = input("Is labelcorrect?")
-        print(answer)
         if answer == "no":
             i=0
             for label_ in chatbot_data.labels:
@@ -37,7 +40,7 @@ def chat(chatbot_data,model,data):
 
             answer2 = input("Choose the correct label (int)")
             print(update_data(int(answer2),inp))
-            
+    return valores
 def show_results(chatbot_data,results):
     error = 0.25
     results = [[i,r] for i,r in enumerate(results) if r>error]

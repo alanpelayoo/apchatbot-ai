@@ -24,7 +24,6 @@ with open('intents.json') as file:
 chatbot_data = DataProcessing(data) #Constructor
 chatbot_data.start_process() # Generate data
 
-print(chatbot_data.training[0])
 
 model = Sequential()
 model.add(Dense(128, input_shape=(len(chatbot_data.training[0]),), activation='relu'))
@@ -36,7 +35,5 @@ sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 model.fit(chatbot_data.training, chatbot_data.output, epochs=1000, batch_size=5, verbose=1)
-
-print(model.summary())
 
 chat(chatbot_data,model,data)
