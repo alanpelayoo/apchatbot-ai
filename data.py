@@ -31,7 +31,6 @@ class DataProcessing:
         print("step 2")
         self.words = [stemmer.stem(w.lower()) for w in self.words] #standarize words to base form.
         self.words = sorted(list(set(self.words)))  #Stemed vocabulary created.
-        self.labels = sorted(self.labels)
         self.bag_of_words()
 
     
